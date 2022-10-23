@@ -32,7 +32,6 @@ class Trip(Model):
     where_to = models.CharField(max_length=50)
     departure_date = models.DateTimeField()
     return_date =  models.DateTimeField()
-    length_of_stay = return_date - departure_date
     price_for_an_adult = models.BigIntegerField()
     price_for_an_child = models.BigIntegerField()
     number_of_places_for_adults = models.BigIntegerField()
@@ -50,15 +49,22 @@ class Trip(Model):
     ]
     type = models.CharField(choices=TYPE_NAME_CHOICES, max_length=2, unique=True)
 
+    @property
+    def length_of_stay(self):
+        return self.return_date - self.departure_date
+
 
 class Purchase(Model):
     trip = models.ForeignKey(City, on_delete=models.CASCADE, related_name="airports")
     amount_adults = models.BigIntegerField()
     amount_children = models.BigIntegerField()
-    unit_price_adult = Trip.price_for_an_adult
-    unit_price_child = Trip.price_for_an_child
-    total_price = (amount_adults * unit_price_adult) + (amount_children * unit_price_child)
+    unit_price_adult = models.BigIntegerField()
+    unit_price_child = models.BigIntegerField()
 
+
+    @property
+    def total_price(self):
+        return (self.amount_adults * self.unit_price_adult) + (self.amount_children * self.unit_price_child)
 
 
 
