@@ -55,7 +55,7 @@ class Trip(Model):
 
 
 class Purchase(Model):
-    trip = models.ForeignKey(City, on_delete=models.CASCADE, related_name="airports")
+    trip = models.ForeignKey(City, on_delete=models.CASCADE, related_name="trip")
     amount_adults = models.BigIntegerField()
     amount_children = models.BigIntegerField()
     unit_price_adult = models.BigIntegerField()
