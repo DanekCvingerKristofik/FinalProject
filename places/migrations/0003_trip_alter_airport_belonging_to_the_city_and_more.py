@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='airport',
             name='belonging_to_the_city',
-            field=models.ForeignKey(default='exit', on_delete=django.db.models.deletion.CASCADE, related_name='airports', to='places.city'),
+            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, related_name='airports', to='places.city'),
             preserve_default=False,
         ),
         migrations.RemoveField(
@@ -54,13 +54,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='city',
             name='belonging_to_the_country',
-            field=models.ForeignKey(default='exit', on_delete=django.db.models.deletion.CASCADE, related_name='cities', to='places.country'),
+            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, related_name='cities', to='places.country'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='hotel',
             name='belonging_to_the_city',
-            field=models.ForeignKey(default='exit', on_delete=django.db.models.deletion.CASCADE, related_name='hotels', to='places.city'),
+            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, related_name='hotels', to='places.city'),
             preserve_default=False,
         ),
     ]

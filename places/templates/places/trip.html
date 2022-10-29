@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>{{ trip.where_from }}</h1>
+    <div>{{ trip.where_from }}  {{ trip.where_to  }}  {{ trip.departure_date}} {{ trip.return_date}} {{ trip.price_for_an_adult}}
+                {{ trip.price_for_an_child}}</div>
+
+{% endblock %}

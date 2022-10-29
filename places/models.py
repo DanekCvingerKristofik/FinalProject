@@ -1,4 +1,4 @@
-
+from django.contrib.auth import get_user_model
 from django.db import models
 
 # Create your models here.
@@ -7,6 +7,7 @@ from django.db.models import Model
 
 class Country(Model):
     name = models.CharField(max_length=50)
+
 
 
 class City(Model):
@@ -28,8 +29,8 @@ class Airport(Model):
 
 
 class Trip(Model):
-    where_from = models.CharField(max_length=50)
-    where_to = models.CharField(max_length=50)
+    where_from = models.ForeignKey(City, on_delete=models.CASCADE, related_name="from_destination_trips")
+    where_to = models.ForeignKey(City, on_delete=models.CASCADE, related_name="to_destination_trips")
     departure_date = models.DateTimeField()
     return_date =  models.DateTimeField()
     price_for_an_adult = models.BigIntegerField()
@@ -47,7 +48,7 @@ class Trip(Model):
         (full_board, 'full board'),
         (all_inclusive , 'all inclusive')
     ]
-    type = models.CharField(choices=TYPE_NAME_CHOICES, max_length=2, unique=True)
+    type = models.CharField(choices=TYPE_NAME_CHOICES, max_length=2)
 
     @property
     def length_of_stay(self):
@@ -55,7 +56,8 @@ class Trip(Model):
 
 
 class Purchase(Model):
-    trip = models.ForeignKey(City, on_delete=models.CASCADE, related_name="trip")
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name="purchases")
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="purchases")
     amount_adults = models.BigIntegerField()
     amount_children = models.BigIntegerField()
     unit_price_adult = models.BigIntegerField()
