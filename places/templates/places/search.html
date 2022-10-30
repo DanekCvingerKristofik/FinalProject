@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Výsledky hledání pro: {{ query }}</h1>
+ <ul>
+     {% for trip in trips %}
+        <li>
+            <a href = "{% url 'trip' trip.id %}">
+                <b>{{ trip.name }}</b> </a>
+        </li>
+     {% endfor %}
+ </ul>
+{% endblock %}

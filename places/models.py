@@ -8,11 +8,15 @@ from django.db.models import Model
 class Country(Model):
     name = models.CharField(max_length=50)
 
-
+    def __str__(self):
+       return  f"country: {self.name}"
 
 class City(Model):
     name = models.CharField(max_length=50)
     belonging_to_the_country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="cities")
+
+    def __str__(self):
+       return  f" {self.name} "
 
 
 
@@ -22,10 +26,17 @@ class Hotel(Model):
     stars = models.CharField(max_length=5)
     description = models.CharField(max_length=250)
 
+    def __str__(self):
+       return  f"hotel: {self.name}"
+
+
 
 class Airport(Model):
     name = models.CharField(max_length=50)
     belonging_to_the_city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="airports")
+
+    def __str__(self):
+       return  f"airport: {self.name}"
 
 
 class Trip(Model):
@@ -49,6 +60,9 @@ class Trip(Model):
         (all_inclusive , 'all inclusive')
     ]
     type = models.CharField(choices=TYPE_NAME_CHOICES, max_length=2)
+
+    def __str__(self):
+       return  f"destination: {self.where_to}"
 
     @property
     def length_of_stay(self):

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', places.views.home, name = "home"),
     path('trip/<int:id>/', places.views.trip, name = "trip"),
+    path('search/', places.views.search, name = "search"),
 
 ]

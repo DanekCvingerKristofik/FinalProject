@@ -1,16 +1,17 @@
 {% extends 'main.html' %}
 {% block content %}
 <h1>Trips</h1>
-    <a href="{% url 'home'%}?dest=Slovensko"><b> Výlet na Slovensko</b></a><br>
+    <a href="{% url "home"%}?dest=Slovensko"><b> Výlet na Slovensko</b></a><br>
      <a href="{% url 'home'%}?dest=Maďarsko"><b> Výlet do Maďarska</b></a><br>
     <a href="{% url 'home'%}?dest=Polsko"><b> Výlet do  Polska</b></a><br>
+    <a href="{% url 'home'%}"> <b> Všechny</b></a><br>
  <ul>
      {% for trip in trips %}
         <li>
             <div class="box">
-                <a href="{% url 'trip' trip.id %}"><b>{{ trip.where_from }}</b></a><br>
-                    {{ trip.where_to  }}  {{ trip.departure_date}} {{ trip.return_date}} {{ trip.price_for_an_adult}}
-                {{ trip.price_for_an_child}}
+                <a href="{% url 'trip' trip.id %}"><b>{{ trip }}</b></a><br>
+                   <b>from:</b> {{ trip.where_from }}   <b>destination:</b> {{ trip.where_to  }}  <b>departure date:</b> {{ trip.departure_date}}   <b>return date:</b> {{ trip.return_date}}   <b>adult price:</b> {{ trip.price_for_an_adult}} euro
+                  <b>child price:</b> {{ trip.price_for_an_child}} euro
             </div>
         </li>
      {% endfor %}

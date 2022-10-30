@@ -2,7 +2,9 @@
 
 {% block content %}
     <h1>{{ trip.where_from }}</h1>
-    <div>{{ trip.where_from }}  {{ trip.where_to  }}  {{ trip.departure_date}} {{ trip.return_date}} {{ trip.price_for_an_adult}}
-                {{ trip.price_for_an_child}}</div>
-
+    <div> <b>destination:   </b> {{ trip.where_to}}</div>
+    <div> <b>departure date:   </b>{{ trip.departure_date}}</div>
+    <div><b>return date:    </b>{{ trip.return_date}}</div>
+    <div> <b>adult price:    </b>{{ trip.price_for_an_adult}} euro</div>
+    <div> <b>child price:   </b>{{ trip.price_for_an_child}}euro </div>
 {% endblock %}
