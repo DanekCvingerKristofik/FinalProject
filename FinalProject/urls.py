@@ -25,6 +25,7 @@ urlpatterns = [
     path('', places.views.home, name = "home"),
     path('trip/<int:id>/', places.views.trip, name = "trip"),
     path('search/', places.views.search, name = "search"),
-
+    path('purchase_create/', places.views.PurchaseCreateView.as_view(), name='purchase_create'),
+    # path('purchase_create/', places.views.PurchaseCreateView, name='purchase_create')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

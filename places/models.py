@@ -72,15 +72,14 @@ class Trip(Model):
 class Purchase(Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name="purchases")
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="purchases")
-    amount_adults = models.BigIntegerField()
-    amount_children = models.BigIntegerField()
-    unit_price_adult = models.BigIntegerField()
-    unit_price_child = models.BigIntegerField()
+    amount_adults = models.IntegerField()
+    amount_children = models.IntegerField()
+
 
 
     @property
     def total_price(self):
-        return (self.amount_adults * self.unit_price_adult) + (self.amount_children * self.unit_price_child)
+        return (self.amount_adults * self.trip.price_for_an_adult) + (self.amount_children * self.trip.price_for_an_child)
 
 
 

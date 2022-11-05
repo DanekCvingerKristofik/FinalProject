@@ -1,8 +1,12 @@
+from django.contrib.auth import authenticate
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-from places.models import Trip, Country
+from places.forms import PurchaseForm
+from places.models import Trip, Country, Purchase
 
 
 # Create your views here.
@@ -37,3 +41,23 @@ def search(request):
         )
         context = {"query": q, "trips" : trips}
         return render(request, "places/search.html", context)
+
+class PurchaseCreateView(CreateView):
+    template_name = 'places/purchase_form.html'
+    form_class = PurchaseForm
+
+    def post(self, request, *args, **kwargs):
+        trip = request.POST.get("")
+        amount_children = request.POST.get('')
+        amount_adults = request.POST.get('')
+        user = request.POST.get(' ')
+        purchase = Purchase.objects.create(trip = trip, user = user, amount_adults = amount_adults, amount_children = amount_children)
+        purchase.save()
+        return redirect("home")
+
+
+# def PurchaseCreateView(request):
+#     context = {}
+#     form = PurchaseForm(request.POST)
+#     context['form'] = form
+#     return render(request,"places/purchase_form.html", context)

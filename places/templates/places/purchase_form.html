@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <form method="POST">
+       {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            <label for="{{ form.name.id_for_label }}">Trip:</label>
+            {{ form.trip }}
+        </div>
+        <div>
+             <label for="{{ form.description.id_for_label }}">Amount of children:</label>
+            {{ form.amount_children }}
+            <b style="color: red">{{ form.description.errors }}</b>
+        </div>
+        <div>
+             <label for="{{ form.description.id_for_label }}">Amount of adults:</label>
+            {{ form.amount_adults}}
+            <b style="color: red">{{ form.description.errors }}</b>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
