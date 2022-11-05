@@ -30,12 +30,10 @@ def search(request):
         return HttpResponse("Zadejte co chcete hledat")
     else:
         trips = Trip.objects.filter(
-            Q(where_from__contains = q) |
-            Q(where_to__contains= q)|
-            Q(departure_date__contains= q) |
-            Q(return_date__contains= q) |
-            Q(type__contains= q) |
-            Q(length_of_stay__contains= q)
+            Q(where_from__name__contains = q) |
+            Q(where_to__name__contains = q) |
+            Q(where_to__belonging_to_the_country__name__contains=q) |
+            Q(where_from__belonging_to_the_country__name__contains=q)
         )
         context = {"query": q, "trips" : trips}
         return render(request, "places/search.html", context)

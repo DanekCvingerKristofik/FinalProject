@@ -6,7 +6,7 @@
      {% for trip in trips %}
         <li>
             <a href = "{% url 'trip' trip.id %}">
-                <b>{{ trip.name }}</b> </a>
+                <b>{{ trip.where_from }}</b> </a>
         </li>
      {% endfor %}
  </ul>
