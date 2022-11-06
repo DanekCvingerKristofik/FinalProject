@@ -1,9 +1,14 @@
-{#<ul>#}
-{#    <li class="first active">#}
-{#        <a href="{% url 'home' %}">HOME</a>#}
-{#    </li>#}
-{#    <li class = "last-child">#}
-{#        <a href="{% url 'logout' %}">LOGOUT</a>#}
-{#         {{request.user.username}}#}
-{#    </li>#}
-{#</ul><br class="clearfix"/>#}
+<ul>
+    <li class="first active">
+        <a href="{% url 'home' %}">HOME</a>
+    </li>
+    {% if user.is_authenticated %}
+    <li class="first active">
+        <a href="{% url "purchase_create"%}">PURCHASE</a>
+    </li>
+    {% endif %}
+    <li class = "last-child">
+        <a href="{% url 'logout' %}">LOGOUT</a>
+         {{request.user.username}}
+    </li>
+</ul><br class="clearfix"/>

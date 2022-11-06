@@ -27,7 +27,7 @@ class Hotel(Model):
     description = models.CharField(max_length=250)
 
     def __str__(self):
-       return  f"hotel: {self.name}"
+       return  f" {self.name}"
 
 
 
@@ -36,12 +36,14 @@ class Airport(Model):
     belonging_to_the_city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="airports")
 
     def __str__(self):
-       return  f"airport: {self.name}"
+       return  f"{self.name}"
 
 
 class Trip(Model):
     where_from = models.ForeignKey(City, on_delete=models.CASCADE, related_name="from_destination_trips")
     where_to = models.ForeignKey(City, on_delete=models.CASCADE, related_name="to_destination_trips")
+    airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="airport")
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="hotel")
     departure_date = models.DateTimeField()
     return_date =  models.DateTimeField()
     price_for_an_adult = models.BigIntegerField()

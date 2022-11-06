@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 import places.views
 
@@ -26,6 +26,8 @@ urlpatterns = [
     path('trip/<int:id>/', places.views.trip, name = "trip"),
     path('search/', places.views.search, name = "search"),
     path('purchase_create/', places.views.PurchaseCreateView.as_view(), name='purchase_create'),
-    # path('purchase_create/', places.views.PurchaseCreateView, name='purchase_create')
+    path('accounts/signup/', places.views.SignUpView.as_view(), name='signup'),
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('your_purchase/', places.views.your_purchase, name='your_purchase'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

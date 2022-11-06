@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Your purchase</h1>
+ <ul>
+        <li>
+            User: {{ purchase.user }}
+        </li>
+        <li>
+            From: {{ purchase.trip.where_from.name }}
+        </li>
+        <li>
+            Destination: {{ purchase.trip.where_to.name}}
+        </li>
+        <li>
+            Hotel: {{purchase.trip.hotel.name}}
+        </li>
+        <li>
+            Airport: {{purchase.trip.airport.name}}
+        </li>
+         <li>
+            Departure date: {{ purchase.trip.departure_date}}
+        </li>
+         <li>
+            Return date: {{ purchase.trip.return_date}}
+        </li>
+        <li>
+           Amount adults: {{ purchase.amount_adults}}
+        </li>
+        <li>
+           Amount children: {{ purchase.amount_children}}
+        </li>
+        <li>
+           Unit price for adult: {{ purchase.trip.price_for_an_adult}}
+        </li>
+        <li>
+           Unit price for child: {{ purchase.trip.price_for_an_child}}
+        </li>
+        <li>
+           Total price: {{ purchase.total_price}}
+        </li>
+
+ </ul>
+{% endblock %}
