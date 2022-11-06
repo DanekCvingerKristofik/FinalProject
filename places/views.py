@@ -30,6 +30,17 @@ def trip(request, id):
       context = {'trip': trip}
       return render(request, 'places/trip.html', context)
 
+def hotel(request, id):
+    hotel = Trip.objects.get(id=id)
+    context = {'trip': hotel}
+    return render(request, 'places/hotel.html', context)
+
+# class ProfilCreateView(LoginRequiredMixin,CreateView):
+#     template_name = 'places/profil_form.html'
+#     form_class = ProfilForm
+
+
+
 def search(request):
     q = request.GET.get('q', ' ')
     if q == ' ' :
@@ -67,3 +78,5 @@ def your_purchase(request):
     purchase = Purchase.objects.filter(user = request.user).last()
     context = {"purchase": purchase}
     return render(request, "places/your_purchase.html", context)
+
+
