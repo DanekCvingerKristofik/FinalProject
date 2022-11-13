@@ -1,8 +1,9 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 
 
-from places.models import Purchase
+from places.models import Purchase, Profil
 
 
 class PurchaseForm(ModelForm):
@@ -11,12 +12,16 @@ class PurchaseForm(ModelForm):
         model = Purchase
         fields = '__all__'
 
-# class ProfilForm(ModelForm):
-#     class Meta:
-#         model = Profil
-#         fields = '__all__'
 
 
+
+
+
+class RegistrationForm(UserCreationForm):
+    def save(self, commit=True):
+        user = super().save(commit=True)
+        Profil.objects.create(user=user)
+        return user
 
 
 

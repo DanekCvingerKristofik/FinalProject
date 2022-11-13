@@ -27,9 +27,9 @@ urlpatterns = [
     path('hotel/<int:id>/', places.views.hotel, name = "hotel"),
     path('search/', places.views.search, name = "search"),
     path('purchase_create/', places.views.PurchaseCreateView.as_view(), name='purchase_create'),
-    # path('profil_create/', places.views.ProfilCreateView.as_view(), name='profil_create'),
     path('accounts/signup/', places.views.SignUpView.as_view(), name='signup'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('your_purchase/', places.views.your_purchase, name='your_purchase'),
+    path('profil/', places.views.profil, name='profil')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

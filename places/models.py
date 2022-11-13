@@ -84,11 +84,13 @@ class Purchase(Model):
         return (self.amount_adults * self.trip.price_for_an_adult) + (self.amount_children * self.trip.price_for_an_child)
 
 
-# class Profil(Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     first_name = models.CharField()
-#     last_name = models.CharField()
-#     purchases = models.ManyToManyField(Purchase)
+class Profil(Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="profil")
+    points = models.IntegerField(default=1000)
+
+    @property
+    def add_points(self, points):
+        points += 100
 
 
 

@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
 <h1>Trips</h1>
-    <a href="{% url "home"%}?dest=Slovensko"><b> Výlet na Slovensko</b></a><br>
-     <a href="{% url 'home'%}?dest=Maďarsko"><b> Výlet do Maďarska</b></a><br>
-    <a href="{% url 'home'%}?dest=Polsko"><b> Výlet do  Polska</b></a><br>
+    <a href="{% url "home"%}?dest=Slovensko&sort=departure_date"><b> Výlet na Slovensko</b></a><br>
+     <a href="{% url 'home'%}?dest=Maďarsko&sort=departure_date"><b> Výlet do Maďarska</b></a><br>
+    <a href="{% url 'home'%}?dest=Polsko&sort=departure_date"><b> Výlet do  Polska</b></a><br>
     <a href="{% url 'home'%}"> <b> Všechny</b></a><br>
  <ul>
      {% for trip in trips %}

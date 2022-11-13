@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+
+    {% for purchase in user.purchases.all %}
+        <ul style="margin-bottom: 50px">
+        <li> destination: {{ purchase.trip.where_to}} </li>
+        <li> aiport: {{ purchase.trip.airport}} </li>
+        <li> hotel: {{ purchase.trip.hotel}} </li>
+        <li> departure date: {{ purchase.trip.departure_date}} </li>
+        <li> return date: {{ purchase.trip.return_date}} </li>
+        <li> amount adults: {{ purchase.amount_adults}} </li>
+        <li> amount children: {{ purchase.amount_children}} </li>
+        <li> total price: {{ purchase.total_price}} Kč </li>
+
+     </ul>
+
+    {% endfor %}
+{% endblock %}

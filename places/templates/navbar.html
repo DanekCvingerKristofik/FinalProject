@@ -7,6 +7,11 @@
         <a href="{% url "purchase_create"%}">PURCHASE</a>
     </li>
     {% endif %}
+    {% if user.is_authenticated %}
+        <li class="first active">
+            <a href="{% url "profil"%}">YOUR PURCHASES</a>
+        </li>
+        {% endif %}
     <li class = "last-child">
         <a href="{% url 'logout' %}">LOGOUT</a>
          {{request.user.username}}

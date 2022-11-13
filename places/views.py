@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -7,8 +8,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from places.forms import PurchaseForm
-from places.models import Trip, Purchase
+from places.forms import PurchaseForm, RegistrationForm
+from places.models import Trip, Purchase, Hotel
 
 
 # Create your views here.
@@ -16,8 +17,9 @@ from places.models import Trip, Purchase
 
 def home(request):
      dest = request.GET.get("dest")
+     sort = request.GET.get("sort")
      if dest:
-          trips = Trip.objects.filter(where_to__belonging_to_the_country__name= dest)
+          trips = Trip.objects.filter(where_to__belonging_to_the_country__name= dest).order_by(sort)
 
      else:
           trips = Trip.objects.all()
@@ -31,8 +33,8 @@ def trip(request, id):
       return render(request, 'places/trip.html', context)
 
 def hotel(request, id):
-    hotel = Trip.objects.get(id=id)
-    context = {'trip': hotel}
+    hotel = Hotel.objects.get(id=id)
+    context = {'hotel': hotel}
     return render(request, 'places/hotel.html', context)
 
 # class ProfilCreateView(LoginRequiredMixin,CreateView):
@@ -71,12 +73,19 @@ class PurchaseCreateView(LoginRequiredMixin,CreateView):
 
 class SignUpView(CreateView):
     template_name = "accounts/signup.html"
-    form_class = UserCreationForm
+    form_class = RegistrationForm
     success_url = reverse_lazy('login')
+
+
+
 
 def your_purchase(request):
     purchase = Purchase.objects.filter(user = request.user).last()
     context = {"purchase": purchase}
     return render(request, "places/your_purchase.html", context)
 
+
+@login_required
+def profil(request):
+    return render(request, "places/profil.html")
 
